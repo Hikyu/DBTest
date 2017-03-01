@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common
+Bundle-SymbolicName: com.oscar.dbtest.common;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.oscar.dbtest.common.Activator
+Bundle-Vendor: OSCAR
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Export-Package: com.oscar.dbtest.common,
+ com.oscar.dbtest.common.views

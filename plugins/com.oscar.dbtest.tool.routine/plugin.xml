@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.oscar.dbtest.tool.routine.perspective.DBTestPerspective"
+            id="com.oscar.dbtest.tool.routine.perspective"
+            name="Routine">
+      </perspective>
+   </extension>
+
+</plugin>

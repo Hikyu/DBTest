@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="导航"
+            id="com.oscar.dbtest.common">
+      </category>
+      <view
+            name="脚本导航"
+            icon="icons/sample.gif"
+            category="com.oscar.dbtest.common"
+            class="com.oscar.dbtest.common.views.NavigationScriptsView"
+            id="com.oscar.dbtest.common.views.NavigationScriptsView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:com.oscar.dbtest.common.views.NavigationScriptsView">
+         <command
+               commandId="com.oscar.dbtest.common.scripts_navigation.create"
+               icon="icons/projects.png"
+               label="新建项目"
+               style="push">
+         </command>
+         <command
+               commandId="com.oscar.dbtest.common.scripts_navigation.refersh"
+               icon="icons/refresh.png"
+               label="刷新"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.oscar.dbtest.common.handler.CreateProjectHandler"
+            commandId="com.oscar.dbtest.common.scripts_navigation.create">
+      </handler>
+      <handler
+            class="com.oscar.dbtest.common.handler.NavigationRefershHandler"
+            commandId="com.oscar.dbtest.common.scripts_navigation.refersh">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="新建项目"
+            id="com.oscar.dbtest.common.scripts_navigation.create"
+            name="新建项目">
+      </command>
+      <command
+            description="刷新"
+            id="com.oscar.dbtest.common.scripts_navigation.refersh"
+            name="刷新">
+      </command>
+   </extension>
+
+</plugin>
