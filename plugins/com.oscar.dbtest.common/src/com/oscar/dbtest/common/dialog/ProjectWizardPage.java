@@ -7,22 +7,24 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import com.oscar.dbtest.common.model.ProjectContainer;
+import com.oscar.dbtest.common.model.Project;
 import com.oscar.dbtest.common.model.UIUtils;
 
 public class ProjectWizardPage extends WizardPage {
-	private ProjectContainer project;
+	private Project project;
+	private String name;
+	private String path;
 
-	public ProjectWizardPage() {
+	public ProjectWizardPage(Project project) {
 		super("创建测试项目");
+		this.project = project;
 		setTitle("创建新的测试项目");
 		setDescription("配置测试项目");
-		project = new ProjectContainer("");
 	}
 
 	@Override
 	public boolean isPageComplete() {
-		return !isEmpty(project.getName()) && !isEmpty(project.getPath());
+		return !isEmpty(path) && !isEmpty(name);
 	}
 
 	private boolean isEmpty(String s) {
@@ -38,7 +40,8 @@ public class ProjectWizardPage extends WizardPage {
 		nameText.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				project.setName(nameText.getText());
+				name = nameText.getText();
+				project.setName(name);
 				updateState();
 			}
 		});
@@ -47,7 +50,8 @@ public class ProjectWizardPage extends WizardPage {
 		pathText.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				project.setPath(pathText.getText());
+				path = pathText.getText();
+				project.addPath(path);
 				updateState();
 			}
 		});

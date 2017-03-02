@@ -30,8 +30,6 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 .settings/
-.classpath
-.project
 target/
 pom.xml.tag
 pom.xml.releaseBackup

@@ -5,8 +5,17 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-public class ProjectWizard extends Wizard implements INewWizard {
+import com.oscar.dbtest.common.model.IProjectContainer;
+import com.oscar.dbtest.common.model.Project;
+import com.oscar.dbtest.common.model.ProjectRegister;
 
+public class ProjectWizard extends Wizard implements INewWizard {
+	private Project project;
+	
+	public ProjectWizard() {
+		project = new Project();
+	}
+	
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("创建测试项目");
@@ -15,13 +24,13 @@ public class ProjectWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		addPage(new ProjectWizardPage());
+		addPage(new ProjectWizardPage(project));
 	}
 
 	@Override
 	public boolean performFinish() {
-		// TODO 自动生成的方法存根
-		return false;
+		ProjectRegister.getInstance().addProject(project);
+		return true;
 	}
 
 }

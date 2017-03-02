@@ -34,6 +34,52 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.oscar.dbtest.common.views.NavigationScriptsView">
+         <command
+               commandId="com.oscar.dbtest.common..scripts_navigation.remove"
+               icon="icons/delete.png"
+               label="删除项目"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate
+                        operator="and">
+                     <instanceof
+                           value="com.oscar.dbtest.common.model.Project">
+                     </instanceof>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.oscar.dbtest.common..scripts_navigation.addpath"
+               icon="icons/add.png"
+               label="添加路径"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate
+                        operator="and">
+                     <instanceof
+                           value="com.oscar.dbtest.common.model.Project">
+                     </instanceof>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -45,19 +91,17 @@
             class="com.oscar.dbtest.common.handler.NavigationRefershHandler"
             commandId="com.oscar.dbtest.common.scripts_navigation.refersh">
       </handler>
+      <handler
+            class="com.oscar.dbtest.common.handler.ProjectRemoveHandler"
+            commandId="com.oscar.dbtest.common..scripts_navigation.remove">
+      </handler>
+      <handler
+            class="com.oscar.dbtest.common.handler.ProjectAddPathHandler"
+            commandId="com.oscar.dbtest.common..scripts_navigation.addpath">
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
-      <command
-            description="新建项目"
-            id="com.oscar.dbtest.common.scripts_navigation.create"
-            name="新建项目">
-      </command>
-      <command
-            description="刷新"
-            id="com.oscar.dbtest.common.scripts_navigation.refersh"
-            name="刷新">
-      </command>
    </extension>
 
 </plugin>

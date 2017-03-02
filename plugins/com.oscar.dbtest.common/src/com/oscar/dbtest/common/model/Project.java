@@ -1,21 +1,26 @@
 package com.oscar.dbtest.common.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public class ProjectContainer {
+public class Project implements IProjectContainer {
 	private UUID id;
 	private String name;
-	private String path;
+	private List<String> paths;
 	private String description;
 
-	@SuppressWarnings("unused")
-	private ProjectContainer(){}
-	
-	public ProjectContainer(String name) {
+	public Project(){
 		id = UUID.randomUUID();
+		paths = new ArrayList<>();
+	}
+	
+	public Project(String name) {
+		this();
 		this.name = name;
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -24,14 +29,11 @@ public class ProjectContainer {
 		this.name = name;
 	}
 
-	public String getPath() {
-		return path;
+	public void setPaths(List<String> paths) {
+		this.paths.addAll(paths);
 	}
 
-	public void setPath(String path) {
-		this.path = path;
-	}
-
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -40,8 +42,18 @@ public class ProjectContainer {
 		this.description = description;
 	}
 
+	@Override
 	public String getId() {
 		return id.toString();
+	}
+
+	@Override
+	public List<String> getPaths() {
+		return paths;
+	}
+	
+	public void addPath(String path) {
+		paths.add(path);
 	}
 
 }
