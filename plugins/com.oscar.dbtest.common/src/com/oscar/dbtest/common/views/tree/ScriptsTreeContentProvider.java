@@ -53,6 +53,9 @@ public class ScriptsTreeContentProvider implements IStructuredContentProvider, I
 				public boolean accept(File dir, String name) {
 					File file = new File(dir, name);
 					if (file.isDirectory()) {
+						if (name.endsWith(".")) {//³ýÈ¥  .  .. Ä¿Â¼
+							return false;
+						}
 						return true;
 					}
 					if (name.endsWith(".run")) {

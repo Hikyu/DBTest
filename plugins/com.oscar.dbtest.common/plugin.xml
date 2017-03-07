@@ -9,8 +9,8 @@
             id="com.oscar.dbtest.common">
       </category>
       <view
-            name="脚本导航"
-            icon="icons/sample.gif"
+            name="目录"
+            icon="icons/projects.png"
             category="com.oscar.dbtest.common"
             class="com.oscar.dbtest.common.views.NavigationScriptsView"
             id="com.oscar.dbtest.common.views.NavigationScriptsView">
@@ -59,7 +59,7 @@
             </visibleWhen>
          </command>
          <command
-               commandId="com.oscar.dbtest.common..scripts_navigation.addpath"
+               commandId="com.oscar.dbtest.common.scripts_navigation.addpath"
                icon="icons/add.png"
                label="添加路径"
                style="push">
@@ -79,6 +79,50 @@
                </with>
             </visibleWhen>
          </command>
+         <command
+               commandId="com.oscar.dbtest.common.scripts_navigation.openpath"
+               icon="icons/directory.png"
+               label="打开文件路径"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate
+                        operator="and">
+                     <instanceof
+                           value="java.io.File">
+                     </instanceof>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?before=additions">
+         <toolbar
+               id="com.oscar.dbtest.common.main_toobar.create"
+               label="新建项目">
+            <command
+                  commandId="com.oscar.dbtest.common.scripts_navigation.create"
+                  icon="icons/projects.png"
+                  label="新建项目"
+                  style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:file?before=additions">
+         <command
+               commandId="com.oscar.dbtest.common.scripts_navigation.create"
+               icon="icons/projects.png"
+               label="新建"
+               style="push">
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -97,11 +141,38 @@
       </handler>
       <handler
             class="com.oscar.dbtest.common.handler.ProjectAddPathHandler"
-            commandId="com.oscar.dbtest.common..scripts_navigation.addpath">
+            commandId="com.oscar.dbtest.common.scripts_navigation.addpath">
+      </handler>
+      <handler
+            class="com.oscar.dbtest.common.handler.OpenPathHandler"
+            commandId="com.oscar.dbtest.common.scripts_navigation.openpath">
       </handler>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
+      <command
+            id="com.oscar.dbtest.common.scripts_navigation.create"
+            name="新建项目">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.oscar.dbtest.common.Perspective"
+            id="com.oscar.dbtest.common.perspective"
+            name="DBTest">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.oscar.dbtest.common.views.editor.ScriptEditor"
+            default="false"
+            extensions="run"
+            icon="icons/file.png"
+            id="com.oscar.dbtest.common.views.editor.ScriptEditor"
+            name="script editor">
+      </editor>
    </extension>
 
 </plugin>

@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 import com.oscar.dbtest.common.model.Project;
-import com.oscar.dbtest.common.model.UIUtils;
+import com.oscar.dbtest.common.views.UIUtils;
 
 public class ProjectWizardPage extends WizardPage {
 	private Project project;
@@ -46,7 +46,7 @@ public class ProjectWizardPage extends WizardPage {
 			}
 		});
 
-		final Text pathText = UIUtils.createLabelText(configGroup, "Â·¾¶", ""); // $NON-NLS-2$
+		final Text pathText = UIUtils.createPathLabelText(configGroup, "Â·¾¶", ""); // $NON-NLS-2$
 		pathText.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {

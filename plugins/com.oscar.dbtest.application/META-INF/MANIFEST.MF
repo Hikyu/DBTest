@@ -7,6 +7,6 @@ Bundle-Activator: com.oscar.dbtest.application.Activator
 Bundle-Vendor: OSCAR
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.oscar.dbtest.tool.routine;bundle-version="1.0.0"
+ com.oscar.dbtest.common;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

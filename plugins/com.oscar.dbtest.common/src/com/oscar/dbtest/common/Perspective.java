@@ -1,4 +1,4 @@
-package com.oscar.dbtest.tool.routine.perspective;
+package com.oscar.dbtest.common;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
@@ -6,8 +6,10 @@ import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.IPlaceholderFolderLayout;
 
 import com.oscar.dbtest.common.views.NavigationScriptsView;
+import com.oscar.dbtest.common.views.editor.ScriptEditor;
 
-public class DBTestPerspective implements IPerspectiveFactory {
+public class Perspective implements IPerspectiveFactory {
+
 	public static final String FOLDER_NAVIGATION = "navigation";
 	public static final String FOLDER_DETAIL = "detail";
 	public static final String FOLDER_PROCESS = "process";
@@ -29,7 +31,7 @@ public class DBTestPerspective implements IPerspectiveFactory {
                 IPageLayout.RIGHT,
                 0.8f,
                 editorArea);
-        right.addPlaceholder("script content");
+        right.addPlaceholder(ScriptEditor.ID);
         
         IFolderLayout bottomRight = layout.createFolder(
         		FOLDER_PROCESS,

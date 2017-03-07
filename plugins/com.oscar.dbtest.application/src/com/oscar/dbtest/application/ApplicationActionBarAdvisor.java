@@ -1,5 +1,9 @@
 package com.oscar.dbtest.application;
 
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IStatusLineManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
@@ -18,5 +22,14 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
-
+	@Override
+	protected void fillStatusLine(IStatusLineManager statusLine) {
+	}
+	@Override
+	protected void fillMenuBar(IMenuManager menuBar) {
+		MenuManager fileMenu = new MenuManager("ÎÄ¼þ", IWorkbenchActionConstants.M_FILE);
+		MenuManager windowMenu = new MenuManager("´°¿Ú", IWorkbenchActionConstants.M_WINDOW);
+		menuBar.add(fileMenu);
+		menuBar.add(windowMenu);
+	}
 }

@@ -2,6 +2,9 @@ package com.oscar.dbtest.common.views;
 
 import java.io.File;
 
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
@@ -18,12 +21,17 @@ import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.part.ViewPart;
 
 import com.oscar.dbtest.common.model.INavigationTreeListener;
 import com.oscar.dbtest.common.model.NodeEvent;
 import com.oscar.dbtest.common.model.Project;
 import com.oscar.dbtest.common.model.ProjectRegister;
+import com.oscar.dbtest.common.views.editor.ScriptEditor;
 import com.oscar.dbtest.common.views.tree.FileModifiedLabelProvider;
 import com.oscar.dbtest.common.views.tree.ScriptsTreeContentProvider;
 import com.oscar.dbtest.common.views.tree.ScriptsTreeLabelProvider;
@@ -104,7 +112,24 @@ public class NavigationScriptsView extends ViewPart implements INavigationTreeLi
 
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
-				// TODO
+				IStructuredSelection structSel = (IStructuredSelection) event.getSelection();
+				if (!structSel.isEmpty()) {
+					Object element = structSel.getFirstElement();
+					if (element instanceof File) {
+						File file = (File)element;
+						if (file.isFile()) {
+							IWorkbenchPage page = getViewSite().getPage();
+							IFileStore fileStore;
+							try {
+								fileStore = EFS.getStore( file.toURI() );
+								IEditorInput input = new FileStoreEditorInput(fileStore);
+								page.openEditor(input, ScriptEditor.ID);
+							} catch (CoreException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
 
 			}
 		});
