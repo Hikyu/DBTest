@@ -9,11 +9,26 @@
             id="com.oscar.dbtest.common">
       </category>
       <view
-            name="目录"
-            icon="icons/projects.png"
+            allowMultiple="false"
             category="com.oscar.dbtest.common"
             class="com.oscar.dbtest.common.views.NavigationScriptsView"
-            id="com.oscar.dbtest.common.views.NavigationScriptsView">
+            icon="icons/projects.png"
+            id="com.oscar.dbtest.common.views.NavigationScriptsView"
+            name="目录">
+      </view>
+      <view
+            class="com.oscar.dbtest.common.views.NormalTestView"
+            icon="icons/run.png"
+            id="com.oscar.dbtest.common.views.NormalTestView"
+            name="功能测试"
+            restorable="true">
+      </view>
+      <view
+            class="com.oscar.dbtest.common.views.PerformanceTestView"
+            icon="icons/火箭.png"
+            id="com.oscar.dbtest.common.views.PerformanceTestView"
+            name="性能测试"
+            restorable="true">
       </view>
    </extension>
    <extension
@@ -25,6 +40,12 @@
                commandId="com.oscar.dbtest.common.scripts_navigation.create"
                icon="icons/projects.png"
                label="新建项目"
+               style="push">
+         </command>
+         <command
+               commandId="com.oscar.dbtest.common.scripts_navigation.config_default"
+               icon="icons/设置.png"
+               label="默认配置"
                style="push">
          </command>
          <command
@@ -46,11 +67,7 @@
                   checkEnabled="false">
                <with
                      variable="selection">
-                  <count
-                        value="1">
-                  </count>
-                  <iterate
-                        operator="and">
+                  <iterate>
                      <instanceof
                            value="com.oscar.dbtest.common.model.Project">
                      </instanceof>
@@ -100,6 +117,27 @@
                </with>
             </visibleWhen>
          </command>
+         <command
+               commandId="com.oscar.dbtest.common.scripts_navigation.config"
+               icon="icons/设置.png"
+               label="项目配置"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate
+                        operator="and">
+                     <instanceof
+                           value="com.oscar.dbtest.common.model.Project">
+                     </instanceof>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -111,6 +149,26 @@
                   commandId="com.oscar.dbtest.common.scripts_navigation.create"
                   icon="icons/projects.png"
                   label="新建项目"
+                  style="push">
+            </command>
+         </toolbar>
+         <toolbar
+               id="com.oscar.dbtest.tool.routine.main_toobar.runtest"
+               label="功能测试">
+            <command
+                  commandId="com.oscar.dbtest.common.test.normal"
+                  icon="icons/run.png"
+                  label="功能测试"
+                  style="push">
+            </command>
+         </toolbar>
+         <toolbar
+               id="com.oscar.dbtest.tool.routine.main_toobar.performance_test"
+               label="性能测试">
+            <command
+                  commandId="com.oscar.dbtest.common.test.performance"
+                  icon="icons/火箭.png"
+                  label="性能测试"
                   style="push">
             </command>
          </toolbar>
@@ -146,6 +204,22 @@
       <handler
             class="com.oscar.dbtest.common.handler.OpenPathHandler"
             commandId="com.oscar.dbtest.common.scripts_navigation.openpath">
+      </handler>
+      <handler
+            class="com.oscar.dbtest.common.handler.ConfigProjectHandler"
+            commandId="com.oscar.dbtest.common.scripts_navigation.config">
+      </handler>
+      <handler
+            class="com.oscar.dbtest.common.handler.ConfigDefaultHandler"
+            commandId="com.oscar.dbtest.common.scripts_navigation.config_default">
+      </handler>
+      <handler
+            class="com.oscar.dbtest.common.handler.NormalTestHandler"
+            commandId="com.oscar.dbtest.common.test.normal">
+      </handler>
+      <handler
+            class="com.oscar.dbtest.common.handler.PerformanceTestHandler"
+            commandId="com.oscar.dbtest.common.test.performance">
       </handler>
    </extension>
    <extension

@@ -1,4 +1,4 @@
-package com.oscar.dbtest.tool.routine.handler;
+package com.oscar.dbtest.common.handler;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -9,9 +9,9 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import com.oscar.dbtest.tool.routine.views.ScriptsToRunView;
+import com.oscar.dbtest.common.views.NormalTestView;
 
-public class RunTestHandler extends AbstractHandler {
+public class NormalTestHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -21,9 +21,9 @@ public class RunTestHandler extends AbstractHandler {
             return null;
         }
         try {
-            IViewPart view = activePage.findView(ScriptsToRunView.ID);
+            IViewPart view = activePage.findView(NormalTestView.ID);
             if (view == null) {
-                activePage.showView(ScriptsToRunView.ID);
+                activePage.showView(NormalTestView.ID);
             } 
         } catch (PartInitException ex) {
            // UIUtils.showErrorDialog(null, CenterView.ID, CoreMessages.ToggleViewAction_cannot_open_view + CenterView.ID, ex);
